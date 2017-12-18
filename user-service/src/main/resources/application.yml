@@ -1,0 +1,24 @@
+server:
+  port: 8181
+  contextPath: /uaa
+security:
+  user:
+    username: user
+    password: password
+  enable-csrf: false
+spring:
+  datasource:
+    url: jdbc:mysql://${MCE_MYSQL_HOST}:${MCE_MYSQL_PORT}/${MCE_MYSQL_DATABASE}
+    username: ${MCE_MYSQL_USERNAME}
+    password: ${MCE_MYSQL_PASSWORD}
+    initialize: true
+security.ignored: /resources/**
+eureka:
+  instance:
+    prefer-ip-address: true
+    non-secure-port: 8181
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${MCE_EUREKA_HOST}:${MCE_EUREKA_PORT}/eureka/

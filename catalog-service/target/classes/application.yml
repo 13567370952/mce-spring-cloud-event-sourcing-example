@@ -1,0 +1,17 @@
+spring:
+  redis:
+    host: ${MCE_REDIS_HOST}
+    port: ${MCE_REDIS_PORT}
+  datasource:
+    url: jdbc:mysql://${MCE_MYSQL_HOST}:${MCE_MYSQL_PORT}/${MCE_MYSQL_DATABASE}?useSSL=false
+    username: ${MCE_MYSQL_USERNAME}
+    password: ${MCE_MYSQL_PASSWORD}
+    initialize: true
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${MCE_EUREKA_HOST}:${MCE_EUREKA_PORT}/eureka/

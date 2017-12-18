@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: user-service
+  profiles:
+    active: docker
+---
+spring:
+  profiles: docker
+  cloud:
+    config:
+      uri: http://192.168.1.177:8888

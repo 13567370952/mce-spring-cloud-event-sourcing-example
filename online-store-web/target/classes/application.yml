@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: online-store-web
+zuul:
+  ignored-services: '*'
+  routes:
+    edge-service:
+      path: /api/**
+      url: http://${MCE_EDGE_HOST}:${MCE_EDGE_PORT}
+    auth-service:
+      path: /user/**
+      url: http://${MCE_USER_HOST}:${MCE_USER_PORT}/uaa/user
+security:
+  enable-csrf: false
+  oauth2:
+    resource:
+      userInfoUri: http://${MCE_USER_HOST}:${MCE_USER_PORT}/uaa/user
+    client:
+      accessTokenUri: http://${MCE_USER_HOST}:${MCE_USER_PORT}/uaa/oauth/token
+      userAuthorizationUri: http://${MCE_USER_HOST}:${MCE_USER_PORT}/uaa/oauth/authorize
+      clientId: acme
+      clientSecret: acmesecret
+eureka:
+  instance:
+    non-secure-port: 8787
+    prefer-ip-address: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${MCE_EUREKA_HOST}:${MCE_EUREKA_PORT}/eureka/

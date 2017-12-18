@@ -1,0 +1,24 @@
+spring:
+  jpa:
+    show_sql: false
+    database: MYSQL
+    generate-ddl: true
+  datasource:
+    url: jdbc:mysql://${MCE_MYSQL_HOST}:${MCE_MYSQL_PORT}/${MCE_MYSQL_DATABASE}
+    username: ${MCE_MYSQL_USERNAME}
+    password: ${MCE_MYSQL_PASSWORD}
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://${MCE_USER_HOST}:${MCE_USER_PORT}/uaa/user
+    client:
+      client-id: acme
+  enable-csrf: false
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${MCE_EUREKA_HOST}:${MCE_EUREKA_PORT}/eureka/

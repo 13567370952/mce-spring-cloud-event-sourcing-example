@@ -1,0 +1,12 @@
+spring:
+  neo4j:
+    host: ${MCE_NEO4J_HOST}
+    port: ${MCE_NEO4J_PORT}
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${MCE_EUREKA_HOST}:${MCE_EUREKA_PORT}/eureka/

@@ -1,0 +1,11 @@
+/home/yshen/github/spring-cloud-event-sourcing-example/user-service/src/main/java/demo/api/v1/UserControllerV1.java
+/home/yshen/github/spring-cloud-event-sourcing-example/user-service/src/main/java/demo/login/LoginController.java
+/home/yshen/github/spring-cloud-event-sourcing-example/user-service/src/main/java/demo/config/AuthorizationServerConfig.java
+/home/yshen/github/spring-cloud-event-sourcing-example/user-service/src/main/java/demo/data/BaseEntity.java
+/home/yshen/github/spring-cloud-event-sourcing-example/user-service/src/main/java/demo/user/UserRepository.java
+/home/yshen/github/spring-cloud-event-sourcing-example/user-service/src/main/java/demo/login/UserController.java
+/home/yshen/github/spring-cloud-event-sourcing-example/user-service/src/main/java/demo/config/ResourceServerConfig.java
+/home/yshen/github/spring-cloud-event-sourcing-example/user-service/src/main/java/demo/config/WebMvcConfig.java
+/home/yshen/github/spring-cloud-event-sourcing-example/user-service/src/main/java/demo/UserApplication.java
+/home/yshen/github/spring-cloud-event-sourcing-example/user-service/src/main/java/demo/user/User.java
+/home/yshen/github/spring-cloud-event-sourcing-example/user-service/src/main/java/demo/api/v1/UserServiceV1.java

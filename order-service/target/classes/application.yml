@@ -1,0 +1,25 @@
+spring:
+  data:
+    mongodb:
+      host: ${MCE_MONGODB_HOST}
+      port: ${MCE_MONGODB_PORT}
+  mvc:
+    date-format: "YYYY-MM-dd"
+  jackson:
+    date-format: "YYYY-MM-dd"
+    serialization:
+      write_dates_as_timestamps: true
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://${MCE_USER_HOST}:${MCE_USER_PORT}/uaa/user
+    client:
+      client-id: acme
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${MCE_EUREKA_HOST}:${MCE_EUREKA_PORT}/eureka/

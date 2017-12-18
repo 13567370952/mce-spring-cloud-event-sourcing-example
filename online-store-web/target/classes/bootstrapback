@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: online-store-web
+  profiles:
+    active: docker
+server:
+  port: 8787
+---
+spring:
+  profiles: docker
+  cloud:
+    config:
+      uri: http://10.0.2.109:8888
