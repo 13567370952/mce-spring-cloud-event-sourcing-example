@@ -1,0 +1,39 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: catalog
+  namespace: yshen 
+spec:
+  serviceName: "catalog"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: catalog
+    spec:
+      containers:
+      - name: catalogserver
+        image: catalog-service:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 7777
+          name: catalog
+        env:
+        - name: MCE_MYSQL_HOST
+          value: "10.0.2.109"
+        - name: MCE_MYSQL_PORT
+          value: "30002"
+        - name: MCE_MYSQL_DATABASE
+          value: "dev"
+        - name: MCE_MYSQL_USERNAME
+          value: "root"
+        - name: MCE_MYSQL_PASSWORD
+          value: "dbpass"
+        - name: MCE_REDIS_HOST
+          value: "10.0.2.109"
+        - name: MCE_REDIS_PORT
+          value: "30005"
+        - name: MCE_EUREKA_HOST
+          value: "10.0.2.109"
+        - name: MCE_EUREKA_PORT
+          value: "30001"

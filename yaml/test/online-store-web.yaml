@@ -1,0 +1,33 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: online
+  namespace: yshen 
+spec:
+  serviceName: "online"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: online
+    spec:
+      containers:
+      - name: onlineserver
+        image: online-store-web:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8787
+          name: online
+        env:
+        - name: MCE_EDGE_HOST
+          value: "10.0.2.109"
+        - name: MCE_EDGE_PORT
+          value: "30007"
+        - name: MCE_USER_HOST
+          value: "10.0.2.109"
+        - name: MCE_USER_PORT
+          value: "30006"
+        - name: MCE_EUREKA_HOST
+          value: "10.0.2.109"
+        - name: MCE_EUREKA_PORT
+          value: "30001"

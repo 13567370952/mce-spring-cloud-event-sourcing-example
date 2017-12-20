@@ -1,0 +1,20 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: discovery
+  namespace: yshen 
+spec:
+  serviceName: "discovery"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: discovery
+    spec:
+      containers:
+      - name: discoveryserver
+        image: discovery-service:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8761
+          name: discovery

@@ -1,0 +1,33 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: inventory
+  namespace: yshen 
+spec:
+  serviceName: "inventory"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: inventory
+    spec:
+      containers:
+      - name: inventoryserver
+        image: inventory-service:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 6666
+          name: inventory
+        env:
+        - name: MCE_NEO4J_HOST
+          value: "10.0.2.109"
+        - name: MCE_NEO4J_PORT
+          value: "30003"
+        - name: MCE_USER_HOST
+          value: "10.0.2.109"
+        - name: MCE_USER_PORT
+          value: "30006"
+        - name: MCE_EUREKA_HOST
+          value: "10.0.2.109"
+        - name: MCE_EUREKA_PORT
+          value: "30001"

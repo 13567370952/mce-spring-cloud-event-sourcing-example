@@ -1,0 +1,13 @@
+#discovery-service
+#mysql
+#neo4j
+#mongo
+#redis
+#user-service
+#edge-service
+#account-service
+#inventory-service
+#order-service
+#catalog-service
+#shopping-cart-service
+#online-store-web

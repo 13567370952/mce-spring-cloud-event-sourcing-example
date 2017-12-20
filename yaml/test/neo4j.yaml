@@ -1,0 +1,23 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: neo4j
+  namespace: yshen 
+spec:
+  serviceName: "neo4j"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: neo4j
+    spec:
+      containers:
+      - name: neo4jserver
+        image: neo4j:2.3
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 7474
+          name: neo4j
+        env:
+        - name: NEO4J_AUTH
+          value: "none"

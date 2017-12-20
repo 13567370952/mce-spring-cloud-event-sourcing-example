@@ -1,0 +1,413 @@
+#discovery-service
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: discovery
+  namespace: yshen 
+spec:
+  serviceName: "discovery"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: discovery
+    spec:
+      containers:
+      - name: discoveryserver
+        image: discovery-service:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8761
+          name: discovery
+---
+#mysql
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: mysql
+  namespace: yshen 
+spec:
+  serviceName: "mysql"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysqlserver
+        image: mysql:5.7
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3306
+          name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "dbpass"
+        - name: MYSQL_DATABASE
+          value: "dev"
+---
+#neo4j
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: neo4j
+  namespace: yshen 
+spec:
+  serviceName: "neo4j"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: neo4j
+    spec:
+      containers:
+      - name: neo4jserver
+        image: neo4j:2.3
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 7474
+          name: neo4j
+        env:
+        - name: NEO4J_AUTH
+          value: "none"
+---
+#mongo
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: mongo
+  namespace: yshen 
+spec:
+  serviceName: "mongo"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+      - name: mongoserver
+        image: mongo:3.3
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 27017
+          name: mongo
+---
+#redis
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: redis
+  namespace: yshen 
+spec:
+  serviceName: "redis"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redisserver
+        image: redis:3.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 6379
+          name: redis
+---
+#user-service
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: user
+  namespace: yshen 
+spec:
+  serviceName: "user"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: user
+    spec:
+      containers:
+      - name: userserver
+        image: user-service:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8181
+          name: user
+        env:
+        - name: MCE_MYSQL_HOST
+          value: "10.0.2.109"
+        - name: MCE_MYSQL_PORT
+          value: "30002"
+        - name: MCE_MYSQL_DATABASE
+          value: "dev"
+        - name: MCE_MYSQL_USERNAME
+          value: "root"
+        - name: MCE_MYSQL_PASSWORD
+          value: "dbpass"
+        - name: MCE_EUREKA_HOST
+          value: "10.0.2.109"
+        - name: MCE_EUREKA_PORT
+          value: "30001"
+---
+#edge-service
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: edge
+  namespace: yshen 
+spec:
+  serviceName: "edge"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: edge
+    spec:
+      containers:
+      - name: edgeserver
+        image: edge-service:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9999
+          name: edge
+        env:
+        - name: MCE_USER_HOST
+          value: "10.0.2.109"
+        - name: MCE_USER_PORT
+          value: "30006"
+        - name: MCE_EUREKA_HOST
+          value: "10.0.2.109"
+        - name: MCE_EUREKA_PORT
+          value: "30001"
+---
+#account-service
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: account
+  namespace: yshen 
+spec:
+  serviceName: "account"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: account
+    spec:
+      containers:
+      - name: accountserver
+        image: account-service:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8888
+          name: account
+        env:
+        - name: MCE_MYSQL_HOST
+          value: "10.0.2.109"
+        - name: MCE_MYSQL_PORT
+          value: "30002"
+        - name: MCE_MYSQL_DATABASE
+          value: "dev"
+        - name: MCE_MYSQL_USERNAME
+          value: "root"
+        - name: MCE_MYSQL_PASSWORD
+          value: "dbpass"
+        - name: MCE_USER_HOST
+          value: "10.0.2.109"
+        - name: MCE_USER_PORT
+          value: "30006"
+        - name: MCE_EUREKA_HOST
+          value: "10.0.2.109"
+        - name: MCE_EUREKA_PORT
+          value: "30001"
+---
+#inventory-service
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: inventory
+  namespace: yshen 
+spec:
+  serviceName: "inventory"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: inventory
+    spec:
+      containers:
+      - name: inventoryserver
+        image: inventory-service:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 6666
+          name: inventory
+        env:
+        - name: MCE_NEO4J_HOST
+          value: "10.0.2.109"
+        - name: MCE_NEO4J_PORT
+          value: "30003"
+        - name: MCE_USER_HOST
+          value: "10.0.2.109"
+        - name: MCE_USER_PORT
+          value: "30006"
+        - name: MCE_EUREKA_HOST
+          value: "10.0.2.109"
+        - name: MCE_EUREKA_PORT
+          value: "30001"
+---
+#order-service
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: order
+  namespace: yshen 
+spec:
+  serviceName: "order"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: order
+    spec:
+      containers:
+      - name: orderserver
+        image: order-service:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5555
+          name: order
+        env:
+        - name: MCE_MONGODB_HOST
+          value: "10.0.2.109"
+        - name: MCE_MONGODB_PORT
+          value: "30004"
+        - name: MCE_USER_HOST
+          value: "10.0.2.109"
+        - name: MCE_USER_PORT
+          value: "30006"
+        - name: MCE_EUREKA_HOST
+          value: "10.0.2.109"
+        - name: MCE_EUREKA_PORT
+          value: "30001"
+---
+#catalog-service
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: catalog
+  namespace: yshen 
+spec:
+  serviceName: "catalog"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: catalog
+    spec:
+      containers:
+      - name: catalogserver
+        image: catalog-service:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 7777
+          name: catalog
+        env:
+        - name: MCE_MYSQL_HOST
+          value: "10.0.2.109"
+        - name: MCE_MYSQL_PORT
+          value: "30002"
+        - name: MCE_MYSQL_DATABASE
+          value: "dev"
+        - name: MCE_MYSQL_USERNAME
+          value: "root"
+        - name: MCE_MYSQL_PASSWORD
+          value: "dbpass"
+        - name: MCE_REDIS_HOST
+          value: "10.0.2.109"
+        - name: MCE_REDIS_PORT
+          value: "30005"
+        - name: MCE_EUREKA_HOST
+          value: "10.0.2.109"
+        - name: MCE_EUREKA_PORT
+          value: "30001"
+---
+#shopping-cart-service
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: shopping
+  namespace: yshen 
+spec:
+  serviceName: "shopping"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: shopping
+    spec:
+      containers:
+      - name: shoppingserver
+        image: shopping-cart-service:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: shopping
+        env:
+        - name: MCE_MYSQL_HOST
+          value: "10.0.2.109"
+        - name: MCE_MYSQL_PORT
+          value: "30002"
+        - name: MCE_MYSQL_DATABASE
+          value: "dev"
+        - name: MCE_MYSQL_USERNAME
+          value: "root"
+        - name: MCE_MYSQL_PASSWORD
+          value: "dbpass"
+        - name: MCE_USER_HOST
+          value: "10.0.2.109"
+        - name: MCE_USER_PORT
+          value: "30006"
+        - name: MCE_EUREKA_HOST
+          value: "10.0.2.109"
+        - name: MCE_EUREKA_PORT
+          value: "30001"
+---
+#online-store-web
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: online
+  namespace: yshen 
+spec:
+  serviceName: "online"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: online
+    spec:
+      containers:
+      - name: onlineserver
+        image: online-store-web:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8787
+          name: online
+        env:
+        - name: MCE_EDGE_HOST
+          value: "10.0.2.109"
+        - name: MCE_EDGE_PORT
+          value: "30007"
+        - name: MCE_USER_HOST
+          value: "10.0.2.109"
+        - name: MCE_USER_PORT
+          value: "30006"
+        - name: MCE_EUREKA_HOST
+          value: "10.0.2.109"
+        - name: MCE_EUREKA_PORT
+          value: "30001"

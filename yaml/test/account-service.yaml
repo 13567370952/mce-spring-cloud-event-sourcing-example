@@ -1,0 +1,39 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: account
+  namespace: yshen 
+spec:
+  serviceName: "account"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: account
+    spec:
+      containers:
+      - name: accountserver
+        image: account-service:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8888
+          name: account
+        env:
+        - name: MCE_MYSQL_HOST
+          value: "10.0.2.109"
+        - name: MCE_MYSQL_PORT
+          value: "30002"
+        - name: MCE_MYSQL_DATABASE
+          value: "dev"
+        - name: MCE_MYSQL_USERNAME
+          value: "root"
+        - name: MCE_MYSQL_PASSWORD
+          value: "dbpass"
+        - name: MCE_USER_HOST
+          value: "10.0.2.109"
+        - name: MCE_USER_PORT
+          value: "30006"
+        - name: MCE_EUREKA_HOST
+          value: "10.0.2.109"
+        - name: MCE_EUREKA_PORT
+          value: "30001"

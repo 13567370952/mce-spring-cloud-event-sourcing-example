@@ -1,0 +1,467 @@
+#discovery-service 30001
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: discovery
+  namespace: yshen 
+  labels:
+    app: discovery
+spec:
+  clusterIP: None 
+  ports:
+  - port: 8761
+    name: discovery
+  selector:
+    app: discovery 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: discovery-web
+  namespace: yshen
+  labels:
+    app: discovery
+spec:
+  type: NodePort
+  ports:
+  - port: 8761
+    name: discovery
+    nodePort: 30001
+  selector:
+    app: discovery
+---
+#mysql 30002
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: mysql
+  namespace: yshen 
+  labels:
+    app: mysql
+spec:
+  clusterIP: None 
+  ports:
+  - port: 3306
+    name: mysql
+  selector:
+    app: mysql 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: mysql-web
+  namespace: yshen
+  labels:
+    app: mysql
+spec:
+  type: NodePort
+  ports:
+  - port: 3306
+    name: mysql
+    nodePort: 30002
+  selector:
+    app: mysql
+---
+#neo4j 30003
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: neo4j
+  namespace: yshen 
+  labels:
+    app: neo4j
+spec:
+  clusterIP: None 
+  ports:
+  - port: 7474
+    name: neo4j
+  selector:
+    app: neo4j 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: neo4j-web
+  namespace: yshen
+  labels:
+    app: neo4j
+spec:
+  type: NodePort
+  ports:
+  - port: 7474
+    name: neo4j
+    nodePort: 30003
+  selector:
+    app: neo4j
+---
+#mongo 30004
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: mongo
+  namespace: yshen 
+  labels:
+    app: mongo
+spec:
+  clusterIP: None 
+  ports:
+  - port: 27017
+    name: mongo
+  selector:
+    app: mongo 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: mongo-web
+  namespace: yshen
+  labels:
+    app: mongo
+spec:
+  type: NodePort
+  ports:
+  - port: 27017
+    name: mongo
+    nodePort: 30004
+  selector:
+    app: mongo
+---
+#redis 30005
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: redis
+  namespace: yshen 
+  labels:
+    app: redis
+spec:
+  clusterIP: None 
+  ports:
+  - port: 6379
+    name: redis
+  selector:
+    app: redis 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: redis-web
+  namespace: yshen
+  labels:
+    app: redis
+spec:
+  type: NodePort
+  ports:
+  - port: 6379
+    name: redis
+    nodePort: 30005
+  selector:
+    app: redis
+---
+#user-service 30006
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: user
+  namespace: yshen 
+  labels:
+    app: user
+spec:
+  clusterIP: None 
+  ports:
+  - port: 8181
+    name: user
+  selector:
+    app: user 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: user-web
+  namespace: yshen
+  labels:
+    app: user
+spec:
+  type: NodePort
+  ports:
+  - port: 8181
+    name: user
+    nodePort: 30006
+  selector:
+    app: user
+---
+#edge-service 30007
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: edge
+  namespace: yshen 
+  labels:
+    app: edge
+spec:
+  clusterIP: None 
+  ports:
+  - port: 9999
+    name: edge
+  selector:
+    app: edge 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: edge-web
+  namespace: yshen
+  labels:
+    app: edge
+spec:
+  type: NodePort
+  ports:
+  - port: 9999
+    name: edge
+    nodePort: 30007
+  selector:
+    app: edge
+---
+#account-service 30008
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: account
+  namespace: yshen 
+  labels:
+    app: account
+spec:
+  clusterIP: None 
+  ports:
+  - port: 8888
+    name: account
+  selector:
+    app: account 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: account-web
+  namespace: yshen
+  labels:
+    app: account
+spec:
+  type: NodePort
+  ports:
+  - port: 8888
+    name: account
+    nodePort: 30008
+  selector:
+    app: account
+---
+#inventory-service 30009
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: inventory
+  namespace: yshen 
+  labels:
+    app: inventory
+spec:
+  clusterIP: None 
+  ports:
+  - port: 6666
+    name: inventory
+  selector:
+    app: inventory 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: inventory-web
+  namespace: yshen
+  labels:
+    app: inventory
+spec:
+  type: NodePort
+  ports:
+  - port: 6666
+    name: inventory
+    nodePort: 30009
+  selector:
+    app: inventory
+---
+#order-service 30010
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: order
+  namespace: yshen 
+  labels:
+    app: order
+spec:
+  clusterIP: None 
+  ports:
+  - port: 5555
+    name: order
+  selector:
+    app: order 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: order-web
+  namespace: yshen
+  labels:
+    app: order
+spec:
+  type: NodePort
+  ports:
+  - port: 5555
+    name: order
+    nodePort: 30010
+  selector:
+    app: order
+---
+#catalog-service 30011
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: catalog
+  namespace: yshen 
+  labels:
+    app: catalog
+spec:
+  clusterIP: None 
+  ports:
+  - port: 7777
+    name: catalog
+  selector:
+    app: catalog 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: catalog-web
+  namespace: yshen
+  labels:
+    app: catalog
+spec:
+  type: NodePort
+  ports:
+  - port: 7777
+    name: catalog
+    nodePort: 30012
+  selector:
+    app: catalog
+---
+#shopping-cart-service
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: shopping
+  namespace: yshen 
+  labels:
+    app: shopping
+spec:
+  clusterIP: None 
+  ports:
+  - port: 8080
+    name: shopping
+  selector:
+    app: shopping 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: shopping-web
+  namespace: yshen
+  labels:
+    app: shopping
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    name: shopping
+    nodePort: 30012
+  selector:
+    app: shopping
+---
+#online-store-web 30013
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: online
+  namespace: yshen 
+  labels:
+    app: online
+spec:
+  clusterIP: None 
+  ports:
+  - port: 8787
+    name: online
+  selector:
+    app: online 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: online-web
+  namespace: yshen
+  labels:
+    app: online
+spec:
+  type: NodePort
+  ports:
+  - port: 8787
+    name: online
+    nodePort: 30013
+  selector:
+    app: online
